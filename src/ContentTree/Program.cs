@@ -15,7 +15,7 @@ namespace ContentTree
         {
             args = new[] { "-s:https://demo.sensenet.com", "-i:\"..\"" };
 
-            var settings = new Arguments();
+            var settings = new Settings();
             try
             {
                 var result = ArgumentParser.Parse(args, settings);
@@ -37,7 +37,7 @@ namespace ContentTree
             }
         }
 
-        private static void Run(Arguments settings)
+        private static void Run(Settings settings)
         {
             var servers = settings.SiteUrls
                 .Select(u => new ServerContext { Url = u, Username = "admin", Password = "admin" })
@@ -81,12 +81,12 @@ namespace ContentTree
             return rootNodes.ToArray();
         }
 
-        private static void DisplayForest(TreeNode[] forest, Arguments settings)
+        private static void DisplayForest(TreeNode[] forest, Settings settings)
         {
             foreach (var tree in forest)
                 DisplayTree(tree, "", settings);
         }
-        private static void DisplayTree(TreeNode tree, string level, Arguments settings)
+        private static void DisplayTree(TreeNode tree, string level, Settings settings)
         {
             Console.Write(level);
             Console.WriteLine(tree.Name);
